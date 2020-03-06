@@ -39,7 +39,12 @@ class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // for the WebSocket handshake.
         registry
                 .addEndpoint("/vrp-websocket")
-                .setAllowedOrigins("*")
+                .setAllowedOrigins(
+                        "https://frontend.planonn.com",
+                        "https://planner.planonn.com",
+                        "http//planner.planonn.com",
+                        "chrome-extension://ggnhohnkfcpcanfekomdkjffnfcjnjam",
+                        "http://localhost:3000")
                 .withSockJS();
     }
 
