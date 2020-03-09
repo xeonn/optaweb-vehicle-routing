@@ -95,7 +95,7 @@ class RouteListenerTest {
     @Test
     void event_with_no_visits_and_a_depot_should_be_published_as_plan_with_empty_routes() {
         final Coordinates depotCoordinates = Coordinates.valueOf(0.0, 0.1);
-        final Location depot = new Location(1, depotCoordinates);
+        final Location depot = new Location(1, depotCoordinates, 1);
         final long vehicleId = 448;
         final Vehicle vehicle = VehicleFactory.testVehicle(vehicleId);
         ShallowRoute route = new ShallowRoute(vehicle.id(), depot.id(), emptyList());
@@ -139,8 +139,8 @@ class RouteListenerTest {
 
         final long vehicleId = -5;
         final Vehicle vehicle = VehicleFactory.testVehicle(vehicleId);
-        final Location depot = new Location(1, depotCoordinates);
-        final Location visit = new Location(2, visitCoordinates);
+        final Location depot = new Location(1, depotCoordinates, 1);
+        final Location visit = new Location(2, visitCoordinates, 1);
         final String distance = "xy";
         when(vehicleRepository.find(vehicleId)).thenReturn(Optional.of(vehicle));
         when(locationRepository.find(depot.id())).thenReturn(Optional.of(depot));
@@ -176,8 +176,8 @@ class RouteListenerTest {
     @Test
     void should_discard_update_gracefully_if_one_of_the_locations_no_longer_exist() {
         final Vehicle vehicle = VehicleFactory.testVehicle(3);
-        final Location depot = new Location(1, Coordinates.valueOf(1.0, 2.0));
-        final Location visit = new Location(2, Coordinates.valueOf(-1.0, -2.0));
+        final Location depot = new Location(1, Coordinates.valueOf(1.0, 2.0), 1);
+        final Location visit = new Location(2, Coordinates.valueOf(-1.0, -2.0), 1);
         when(vehicleRepository.find(vehicle.id())).thenReturn(Optional.of(vehicle));
         when(locationRepository.find(depot.id())).thenReturn(Optional.of(depot));
         when(locationRepository.find(visit.id())).thenReturn(Optional.empty());
@@ -207,8 +207,8 @@ class RouteListenerTest {
     @Test
     void should_discard_update_gracefully_if_one_of_the_vehicles_no_longer_exist() {
         final Vehicle vehicle = VehicleFactory.testVehicle(3);
-        final Location depot = new Location(1, Coordinates.valueOf(1.0, 2.0));
-        final Location visit = new Location(2, Coordinates.valueOf(-1.0, -2.0));
+        final Location depot = new Location(1, Coordinates.valueOf(1.0, 2.0), 1);
+        final Location visit = new Location(2, Coordinates.valueOf(-1.0, -2.0), 1);
         when(vehicleRepository.find(vehicle.id())).thenReturn(Optional.empty());
         when(locationRepository.find(depot.id())).thenReturn(Optional.of(depot));
         when(locationRepository.find(visit.id())).thenReturn(Optional.of(visit));

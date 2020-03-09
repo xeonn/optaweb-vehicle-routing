@@ -38,11 +38,11 @@ class SolutionFactoryTest {
     void solution_created_from_vehicles_depot_and_visits_should_be_consistent() {
         PlanningVehicle vehicle = new PlanningVehicle();
 
-        PlanningLocation depotLocation = new PlanningLocation(1, 1, 1);
+        PlanningLocation depotLocation = new PlanningLocation(1, 1, 1, 1);
         PlanningDepot depot = new PlanningDepot();
         depot.setLocation(depotLocation);
 
-        PlanningVisit visit = PlanningVisitFactory.visit(new PlanningLocation(2, 2, 2));
+        PlanningVisit visit = PlanningVisitFactory.visit(new PlanningLocation(2, 2, 2, 1));
 
         VehicleRoutingSolution solutionWithDepot = SolutionFactory.solutionFromVisits(
                 singletonList(vehicle),

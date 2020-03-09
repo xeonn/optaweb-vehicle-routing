@@ -42,7 +42,7 @@ class AddVisitTest {
         VehicleRoutingSolution solution = SolutionFactory.emptySolution();
         when(scoreDirector.getWorkingSolution()).thenReturn(solution);
 
-        PlanningLocation location = new PlanningLocation(1, 1.0, 2.0);
+        PlanningLocation location = new PlanningLocation(1, 1.0, 2.0, 1);
         PlanningVisit visit = PlanningVisitFactory.visit(location);
         AddVisit addVisit = new AddVisit(visit);
         addVisit.doChange(scoreDirector);

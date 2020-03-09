@@ -67,9 +67,9 @@ class DataSetMarshallerTest {
         DataSet dataSet = new DataSet();
         String name = "Test data set";
         dataSet.setName(name);
-        DataSetLocation depot = new DataSetLocation("Depot", -1.1, -9.9);
-        DataSetLocation location1 = new DataSetLocation("Location 1", 1.0, 0.1);
-        DataSetLocation location2 = new DataSetLocation("Location 2", 2.0, 0.2);
+        DataSetLocation depot = new DataSetLocation("Depot", -1.1, -9.9, 1);
+        DataSetLocation location1 = new DataSetLocation("Location 1", 1.0, 0.1, 1);
+        DataSetLocation location2 = new DataSetLocation("Location 2", 2.0, 0.2, 1);
         dataSet.setDepot(depot);
         dataSet.setVisits(Arrays.asList(location1, location2));
         String yaml = new DataSetMarshaller().marshal(dataSet);
@@ -99,20 +99,20 @@ class DataSetMarshallerTest {
         String description = "some location";
 
         // domain -> data set
-        DataSetLocation dataSetLocation = toDataSet(new LocationData(Coordinates.valueOf(lat, lng), description));
+        DataSetLocation dataSetLocation = toDataSet(new LocationData(Coordinates.valueOf(lat, lng), 1, description));
         assertThat(dataSetLocation.getLatitude()).isEqualTo(lat);
         assertThat(dataSetLocation.getLongitude()).isEqualTo(lng);
         assertThat(dataSetLocation.getLabel()).isEqualTo(description);
 
         // data set -> domain
         LocationData location = toDomain(dataSetLocation);
-        assertThat(location).isEqualTo(new LocationData(Coordinates.valueOf(lat, lng), description));
+        assertThat(location).isEqualTo(new LocationData(Coordinates.valueOf(lat, lng), 1, description));
     }
 
     @Test
     void routing_problem_conversion() {
-        LocationData depot = new LocationData(Coordinates.valueOf(60.1, 5.78), "Depot");
-        LocationData visit = new LocationData(Coordinates.valueOf(1.06, 8.75), "Visit");
+        LocationData depot = new LocationData(Coordinates.valueOf(60.1, 5.78), 1, "Depot");
+        LocationData visit = new LocationData(Coordinates.valueOf(1.06, 8.75), 1, "Visit");
         List<LocationData> visits = Arrays.asList(visit);
         String name = "some data set";
 

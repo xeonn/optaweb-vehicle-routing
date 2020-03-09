@@ -27,9 +27,9 @@ class LocationEntityTest {
 
     @Test
     void constructor_params_must_not_be_null() {
-        assertThatNullPointerException().isThrownBy(() -> new LocationEntity(null, BigDecimal.ZERO, ""));
-        assertThatNullPointerException().isThrownBy(() -> new LocationEntity(BigDecimal.ZERO, null, ""));
-        assertThatNullPointerException().isThrownBy(() -> new LocationEntity(BigDecimal.ZERO, BigDecimal.ONE, null));
+        assertThatNullPointerException().isThrownBy(() -> new LocationEntity(null, BigDecimal.ZERO, 1, ""));
+        assertThatNullPointerException().isThrownBy(() -> new LocationEntity(BigDecimal.ZERO, null, 1, ""));
+        assertThatNullPointerException().isThrownBy(() -> new LocationEntity(BigDecimal.ZERO, BigDecimal.ONE, 1, null));
     }
 
     @Test
@@ -37,7 +37,7 @@ class LocationEntityTest {
         BigDecimal latitude = BigDecimal.valueOf(0.101);
         BigDecimal longitude = BigDecimal.valueOf(101.0);
         String description = "Description.";
-        LocationEntity locationEntity = new LocationEntity(latitude, longitude, description);
+        LocationEntity locationEntity = new LocationEntity(latitude, longitude, 1, description);
         assertThat(locationEntity.getId()).isZero();
         assertThat(locationEntity.getLongitude()).isEqualTo(longitude);
         assertThat(locationEntity.getLatitude()).isEqualTo(latitude);

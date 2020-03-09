@@ -34,8 +34,8 @@ class RoutingPlanTest {
 
     private final Vehicle vehicle = VehicleFactory.testVehicle(1);
     private final List<Vehicle> vehicles = singletonList(vehicle);
-    private final Location depot = new Location(1, Coordinates.valueOf(5, 5));
-    private final Location visit = new Location(2, Coordinates.valueOf(3, 3));
+    private final Location depot = new Location(1, Coordinates.valueOf(5, 5), 1);
+    private final Location visit = new Location(2, Coordinates.valueOf(3, 3), 1);
     private final RouteWithTrack emptyRoute = new RouteWithTrack(new Route(vehicle, depot, emptyList()), emptyList());
     // Track is not important (we don't check if track starts and ends in the depot and goes through all visits)
     private final List<List<Coordinates>> nonEmptyTrack = singletonList(singletonList(Coordinates.valueOf(5, 5)));
@@ -92,10 +92,10 @@ class RoutingPlanTest {
         Vehicle vehicle1 = VehicleFactory.testVehicle(1);
         Vehicle vehicle2 = VehicleFactory.testVehicle(2);
 
-        Location depot = new Location(100, Coordinates.valueOf(0, 0), "depot");
-        Location visit1 = new Location(101, Coordinates.valueOf(1, 1), "visit1");
-        Location visit2 = new Location(102, Coordinates.valueOf(2, 2), "visit2");
-        Location visit3 = new Location(103, Coordinates.valueOf(3, 3), "visit3");
+        Location depot = new Location(100, Coordinates.valueOf(0, 0), 1, "depot");
+        Location visit1 = new Location(101, Coordinates.valueOf(1, 1), 1, "visit1");
+        Location visit2 = new Location(102, Coordinates.valueOf(2, 2), 1, "visit2");
+        Location visit3 = new Location(103, Coordinates.valueOf(3, 3), 1, "visit3");
 
         assertThatCode(() -> new RoutingPlan(
                 "",
@@ -116,7 +116,7 @@ class RoutingPlanTest {
                 )
         )).withMessageContaining(visit3.toString());
 
-        Location visit4 = new Location(104, Coordinates.valueOf(4, 4), "visit4");
+        Location visit4 = new Location(104, Coordinates.valueOf(4, 4), 1, "visit4");
         assertThatIllegalArgumentException().isThrownBy(() -> new RoutingPlan(
                 "",
                 asList(vehicle1, vehicle2),

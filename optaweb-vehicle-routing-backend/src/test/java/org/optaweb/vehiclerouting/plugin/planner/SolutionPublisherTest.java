@@ -90,8 +90,8 @@ class SolutionPublisherTest {
         long visitId = 2;
         VehicleRoutingSolution solution = solutionFromLocations(
                 emptyList(),
-                new PlanningDepot(new PlanningLocation(depotId, 1.0, 1.0)),
-                singletonList(new PlanningLocation(visitId, 2.0, 2.0))
+                new PlanningDepot(new PlanningLocation(depotId, 1.0, 1.0, 1)),
+                singletonList(new PlanningLocation(visitId, 2.0, 2.0, 1))
         );
 
         RouteChangedEvent event = SolutionPublisher.solutionToEvent(solution, this);
@@ -114,9 +114,9 @@ class SolutionPublisherTest {
         long depotId = 1;
         long visitId1 = 2;
         long visitId2 = 3;
-        PlanningDepot depot = new PlanningDepot(new PlanningLocation(depotId, 1.0, 1.0));
-        PlanningVisit visit1 = visit(new PlanningLocation(visitId1, 2.0, 2.0));
-        PlanningVisit visit2 = visit(new PlanningLocation(visitId2, 0.2, 0.2));
+        PlanningDepot depot = new PlanningDepot(new PlanningLocation(depotId, 1.0, 1.0, 1));
+        PlanningVisit visit1 = visit(new PlanningLocation(visitId1, 2.0, 2.0, 1));
+        PlanningVisit visit2 = visit(new PlanningLocation(visitId2, 0.2, 0.2, 1));
 
         VehicleRoutingSolution solution = solutionFromVisits(
                 asList(vehicle1, vehicle2),
@@ -161,12 +161,12 @@ class SolutionPublisherTest {
     @Test
     void fail_fast_if_vehicles_next_visit_doesnt_exist() {
         PlanningVehicle vehicle = vehicle(1);
-        vehicle.setNextVisit(visit(new PlanningLocation(2, 2.0, 2.0)));
+        vehicle.setNextVisit(visit(new PlanningLocation(2, 2.0, 2.0, 1)));
 
         VehicleRoutingSolution solution = solutionFromLocations(
                 singletonList(vehicle),
-                new PlanningDepot(new PlanningLocation(1, 1.0, 1.0)),
-                singletonList(new PlanningLocation(3, 3.0, 3.0))
+                new PlanningDepot(new PlanningLocation(1, 1.0, 1.0, 1)),
+                singletonList(new PlanningLocation(3, 3.0, 3.0, 1))
         );
 
         assertThatIllegalArgumentException()
@@ -176,7 +176,7 @@ class SolutionPublisherTest {
 
     @Test
     void vehicle_without_a_depot_is_illegal_if_depot_exists() {
-        PlanningDepot depot = new PlanningDepot(new PlanningLocation(1, 1.0, 1.0));
+        PlanningDepot depot = new PlanningDepot(new PlanningLocation(1, 1.0, 1.0, 1));
         PlanningVehicle vehicle = vehicle(1);
         VehicleRoutingSolution solution = solutionFromVisits(singletonList(vehicle), depot, emptyList());
         vehicle.setDepot(null);

@@ -28,15 +28,18 @@ class DataSetLocation {
     private double latitude;
     @JsonProperty(value = "lng")
     private double longitude;
+    @JsonProperty(value = "demand")
+    private int demand;
 
     private DataSetLocation() {
         // for unmarshalling
     }
 
-    DataSetLocation(String label, double latitude, double longitude) {
+    DataSetLocation(String label, double latitude, double longitude, int demand) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.label = label;
+        this.demand = demand;
     }
 
     /**
@@ -75,12 +78,21 @@ class DataSetLocation {
         this.longitude = longitude;
     }
 
+    public int getDemand() {
+        return demand;
+    }
+
+    public void setDemand(int demand) {
+        this.demand = demand;
+    }
+
     @Override
     public String toString() {
         return "DataSetLocation{" +
                 "label='" + label + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+                ", demand=" + demand +
                 '}';
     }
 }

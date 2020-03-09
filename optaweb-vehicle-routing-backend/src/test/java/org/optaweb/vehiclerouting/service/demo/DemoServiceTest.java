@@ -42,6 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -64,14 +65,14 @@ class DemoServiceTest {
     @Captor
     private ArgumentCaptor<RoutingProblem> routingProblemCaptor;
 
-    private final Location depot = new Location(1, Coordinates.valueOf(1.0, 7), "Depot");
-    private final List<Location> visits = Arrays.asList(new Location(2, Coordinates.valueOf(2.0, 9), "Visit"));
+    private final Location depot = new Location(1, Coordinates.valueOf(1.0, 7), 1, "Depot");
+    private final List<Location> visits = Arrays.asList(new Location(2, Coordinates.valueOf(2.0, 9), 1, "Visit"));
     private final String problemName = "Testing problem";
     private final RoutingProblem routingProblem = new RoutingProblem(problemName, depot, visits);
 
     @BeforeEach
     void setUp() {
-        when(locationService.createLocation(any(Coordinates.class), anyString())).thenReturn(true);
+        when(locationService.createLocation(any(Coordinates.class), anyInt(), anyString())).thenReturn(true);
         when(routingProblems.all()).thenReturn(Arrays.asList(routingProblem));
         when(routingProblems.byName(problemName)).thenReturn(routingProblem);
     }
@@ -86,23 +87,23 @@ class DemoServiceTest {
     void loadDemo() {
         demoService.loadDemo(problemName);
         verify(locationService, times(routingProblem.visits().size() + 1))
-                .createLocation(any(Coordinates.class), anyString());
+                .createLocation(any(Coordinates.class), anyInt(), anyString());
     }
 
     @Test
     void retry_when_adding_location_fails() {
-        when(locationService.createLocation(any(Coordinates.class), anyString())).thenReturn(false);
+        when(locationService.createLocation(any(Coordinates.class), anyInt(), anyString())).thenReturn(false);
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> demoService.loadDemo(problemName))
                 .withMessageContaining(depot.coordinates().toString());
-        verify(locationService, times(DemoService.MAX_TRIES)).createLocation(any(Coordinates.class), anyString());
+        verify(locationService, times(DemoService.MAX_TRIES)).createLocation(any(Coordinates.class), anyInt(), anyString());
     }
 
     @Test
     void export_should_marshal_routing_plans_with_locations_from_repository() {
-        Location depot = new Location(0, Coordinates.valueOf(1.0, 2.0), "Depot");
-        Location visit1 = new Location(1, Coordinates.valueOf(11.0, 22.0), "Visit 1");
-        Location visit2 = new Location(2, Coordinates.valueOf(22.0, 33.0), "Visit 2");
+        Location depot = new Location(0, Coordinates.valueOf(1.0, 2.0), 1, "Depot");
+        Location visit1 = new Location(1, Coordinates.valueOf(11.0, 22.0), 1, "Visit 1");
+        Location visit2 = new Location(2, Coordinates.valueOf(22.0, 33.0), 1, "Visit 2");
         when(locationRepository.locations()).thenReturn(Arrays.asList(depot, visit1, visit2));
 
         demoService.exportDataSet();

@@ -35,6 +35,7 @@ class PortableLocationTest {
             987,
             BigDecimal.ONE,
             BigDecimal.TEN,
+            1,
             "Some Location"
     );
     private JacksonTester<PortableLocation> json;
@@ -58,16 +59,16 @@ class PortableLocationTest {
     @Test
     void constructor_params_must_not_be_null() {
         assertThatNullPointerException().isThrownBy(
-                () -> new PortableLocation(1, null, BigDecimal.ZERO, ""));
+                () -> new PortableLocation(1, null, BigDecimal.ZERO, 1, ""));
         assertThatNullPointerException().isThrownBy(
-                () -> new PortableLocation(1, BigDecimal.ZERO, null, ""));
+                () -> new PortableLocation(1, BigDecimal.ZERO, null, 1, ""));
         assertThatNullPointerException().isThrownBy(
-                () -> new PortableLocation(1, BigDecimal.ZERO, BigDecimal.ZERO, null));
+                () -> new PortableLocation(1, BigDecimal.ZERO, BigDecimal.ZERO, 1, null));
     }
 
     @Test
     void fromLocation() {
-        Location location = new Location(17, Coordinates.valueOf(5.1, -0.0007), "Hello, world!");
+        Location location = new Location(17, Coordinates.valueOf(5.1, -0.0007), 1, "Hello, world!");
         PortableLocation portableLocation = PortableLocation.fromLocation(location);
         assertThat(portableLocation.getId()).isEqualTo(location.id());
         assertThat(portableLocation.getLatitude()).isEqualTo(location.coordinates().latitude());
@@ -87,20 +88,20 @@ class PortableLocationTest {
         BigDecimal lat2 = BigDecimal.valueOf(20.2323);
         BigDecimal lon1 = BigDecimal.valueOf(-8.7);
         BigDecimal lon2 = BigDecimal.valueOf(-7.8);
-        PortableLocation portableLocation = new PortableLocation(id, lat1, lon1, description);
+        PortableLocation portableLocation = new PortableLocation(id, lat1, lon1, 1, description);
 
         // equals()
         assertThat(portableLocation).isNotEqualTo(null);
-        assertThat(portableLocation).isNotEqualTo(new Location(id, new Coordinates(lat1, lon1)));
-        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id + 1, lat1, lon1, description));
-        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id, lat1, lon2, description));
-        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id, lat2, lon1, description));
-        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id, lat1, lon1, "y x"));
+        assertThat(portableLocation).isNotEqualTo(new Location(id, new Coordinates(lat1, lon1), 1));
+        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id + 1, lat1, lon1, 1, description));
+        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id, lat1, lon2, 1, description));
+        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id, lat2, lon1, 1, description));
+        assertThat(portableLocation).isNotEqualTo(new PortableLocation(id, lat1, lon1, 1, "y x"));
         assertThat(portableLocation).isEqualTo(portableLocation);
-        assertThat(portableLocation).isEqualTo(new PortableLocation(id, lat1, lon1, description));
+        assertThat(portableLocation).isEqualTo(new PortableLocation(id, lat1, lon1, 1, description));
 
         // hasCode()
-        assertThat(portableLocation).hasSameHashCodeAs(new PortableLocation(id, lat1, lon1, description));
+        assertThat(portableLocation).hasSameHashCodeAs(new PortableLocation(id, lat1, lon1, 1, description));
 
         // toString()
         assertThat(portableLocation.toString()).contains(

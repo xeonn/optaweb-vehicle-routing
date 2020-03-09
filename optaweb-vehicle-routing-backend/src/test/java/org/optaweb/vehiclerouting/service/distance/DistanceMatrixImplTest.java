@@ -148,7 +148,7 @@ class DistanceMatrixImplTest {
     }
 
     private static Location location(long id, int longitude) {
-        return new Location(id, new Coordinates(BigDecimal.ZERO, BigDecimal.valueOf(longitude)));
+        return new Location(id, new Coordinates(BigDecimal.ZERO, BigDecimal.valueOf(longitude)), 1);
     }
 
     private static class MockDistanceCalculator implements DistanceCalculator {

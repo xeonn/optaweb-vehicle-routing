@@ -52,8 +52,8 @@ class LocationRepositoryIntegrationTest {
         final BigDecimal minLongitude = maxLongitude.negate();
         final String description = "...";
 
-        LocationEntity minLocation = new LocationEntity(minLatitude, minLongitude, description);
-        LocationEntity maxLocation = new LocationEntity(maxLatitude, maxLongitude, description);
+        LocationEntity minLocation = new LocationEntity(minLatitude, minLongitude, 1, description);
+        LocationEntity maxLocation = new LocationEntity(maxLatitude, maxLongitude, 1, description);
         crudRepository.save(minLocation);
         crudRepository.save(maxLocation);
 
@@ -65,7 +65,7 @@ class LocationRepositoryIntegrationTest {
     void remove_created_location() {
         Coordinates coordinates = Coordinates.valueOf(0.00213, 32.777);
         assertThat(crudRepository.count()).isZero();
-        Location location = repository.createLocation(coordinates, "");
+        Location location = repository.createLocation(coordinates, 1, "");
         assertThat(location.coordinates()).isEqualTo(coordinates);
         assertThat(crudRepository.count()).isOne();
 
@@ -85,7 +85,7 @@ class LocationRepositoryIntegrationTest {
     void get_and_remove_all_locations() {
         int locationCount = 8;
         for (int i = 0; i < locationCount; i++) {
-            repository.createLocation(Coordinates.valueOf(1.0, i / 100.0), "");
+            repository.createLocation(Coordinates.valueOf(1.0, i / 100.0), 1, "");
         }
 
         assertThat(crudRepository.count()).isEqualTo(locationCount);
@@ -97,7 +97,8 @@ class LocationRepositoryIntegrationTest {
                 .orElseThrow(IllegalStateException::new);
         Location testLocation = new Location(
                 testEntity.getId(),
-                new Coordinates(testEntity.getLatitude(), testEntity.getLongitude())
+                new Coordinates(testEntity.getLatitude(), testEntity.getLongitude()),
+                1
         );
 
         assertThat(repository.locations())

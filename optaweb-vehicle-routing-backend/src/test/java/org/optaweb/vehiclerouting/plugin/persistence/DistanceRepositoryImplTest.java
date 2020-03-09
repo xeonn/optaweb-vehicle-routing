@@ -45,8 +45,8 @@ class DistanceRepositoryImplTest {
     @Mock
     private DistanceEntity distanceEntity;
 
-    private final Location from = new Location(1, Coordinates.valueOf(7, -4.0));
-    private final Location to = new Location(2, Coordinates.valueOf(5, 9.0));
+    private final Location from = new Location(1, Coordinates.valueOf(7, -4.0), 1);
+    private final Location to = new Location(2, Coordinates.valueOf(5, 9.0), 1);
 
     @Test
     void should_save_distance() {

@@ -56,9 +56,9 @@ import static org.optaweb.vehiclerouting.domain.VehicleFactory.testVehicle;
 @MockitoSettings(strictness = Strictness.WARN)
 class RouteOptimizerImplTest {
 
-    private final Location location1 = new Location(1, Coordinates.valueOf(1.0, 0.1));
-    private final Location location2 = new Location(2, Coordinates.valueOf(0.2, 2.2));
-    private final Location location3 = new Location(3, Coordinates.valueOf(3.4, 5.6));
+    private final Location location1 = new Location(1, Coordinates.valueOf(1.0, 0.1), 1);
+    private final Location location2 = new Location(2, Coordinates.valueOf(0.2, 2.2), 1);
+    private final Location location3 = new Location(3, Coordinates.valueOf(3.4, 5.6), 1);
 
     @Captor
     private ArgumentCaptor<VehicleRoutingSolution> solutionArgumentCaptor;

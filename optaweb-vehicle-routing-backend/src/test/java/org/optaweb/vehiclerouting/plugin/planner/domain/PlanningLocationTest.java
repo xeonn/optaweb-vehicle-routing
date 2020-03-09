@@ -26,7 +26,7 @@ class PlanningLocationTest {
 
     @Test
     void planning_location_should_have_same_latitude_and_longitude_as_domain_location() {
-        Location domainLocation = new Location(1, Coordinates.valueOf(1.0, 0.1));
+        Location domainLocation = new Location(1, Coordinates.valueOf(1.0, 0.1), 1);
         PlanningLocation planningLocation = new PlanningLocation(domainLocation);
         assertThat(planningLocation.getId()).isEqualTo(domainLocation.id());
         assertThat(planningLocation.getLatitude()).isEqualTo(domainLocation.coordinates().latitude());

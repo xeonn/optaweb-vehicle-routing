@@ -27,8 +27,8 @@ class LocationTest {
 
     @Test
     void constructor_params_must_not_be_null() {
-        assertThatNullPointerException().isThrownBy(() -> new Location(0, null, ""));
-        assertThatNullPointerException().isThrownBy(() -> new Location(0, Coordinates.valueOf(1, 1), null));
+        assertThatNullPointerException().isThrownBy(() -> new Location(0, null, 1, ""));
+        assertThatNullPointerException().isThrownBy(() -> new Location(0, Coordinates.valueOf(1, 1), 1, null));
     }
 
     @Test
@@ -38,26 +38,26 @@ class LocationTest {
         final String description = "test description";
         final long id = 0;
 
-        final Location location = new Location(id, coordinates0, description);
+        final Location location = new Location(id, coordinates0, 1, description);
 
         // different ID
-        assertThat(location).isNotEqualTo(new Location(1, coordinates0, description));
+        assertThat(location).isNotEqualTo(new Location(1, coordinates0, 1, description));
         // null
         assertThat(location).isNotEqualTo(null);
         // different class
-        assertThat(location).isNotEqualTo(new LocationData(coordinates0, description));
+        assertThat(location).isNotEqualTo(new LocationData(coordinates0, 1, description));
         // same object -> OK
         assertThat(location).isEqualTo(location);
         // same properties -> OK
-        assertThat(location).isEqualTo(new Location(id, coordinates0, description));
+        assertThat(location).isEqualTo(new Location(id, coordinates0, 1, description));
         // same ID, different coordinate -> OK
-        assertThat(location).isEqualTo(new Location(id, coordinates1, description));
+        assertThat(location).isEqualTo(new Location(id, coordinates1, 1, description));
         // same ID, different description -> OK
-        assertThat(location).isEqualTo(new Location(id, coordinates0, "xyz"));
+        assertThat(location).isEqualTo(new Location(id, coordinates0, 1, "xyz"));
     }
 
     @Test
     void constructor_without_description_should_create_empty_description() {
-        assertThat(new Location(7, Coordinates.valueOf(3.14, 4.13)).description()).isEmpty();
+        assertThat(new Location(7, Coordinates.valueOf(3.14, 4.13), 1).description()).isEmpty();
     }
 }

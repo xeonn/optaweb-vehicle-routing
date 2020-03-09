@@ -38,7 +38,7 @@ class RoutingProblemListTest {
 
     @Test
     void all_by_name_should_return_expected_problems() {
-        Location depot = new Location(0, Coordinates.valueOf(10, -20));
+        Location depot = new Location(0, Coordinates.valueOf(10, -20), 1);
         List<Location> visits = Collections.emptyList();
         String name1 = "Problem A";
         String name2 = "Problem B";

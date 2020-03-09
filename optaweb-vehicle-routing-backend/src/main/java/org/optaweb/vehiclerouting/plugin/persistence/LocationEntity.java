@@ -40,6 +40,8 @@ class LocationEntity {
     private BigDecimal latitude;
     @Column(precision = 10, scale = 7)
     private BigDecimal longitude;
+    
+    private int demand;
 
     private String description;
 
@@ -47,10 +49,11 @@ class LocationEntity {
         // for JPA
     }
 
-    LocationEntity(BigDecimal latitude, BigDecimal longitude, String description) {
+    LocationEntity(BigDecimal latitude, BigDecimal longitude, int demand, String description) {
         this.latitude = Objects.requireNonNull(latitude);
         this.longitude = Objects.requireNonNull(longitude);
         this.description = Objects.requireNonNull(description);
+        this.demand = Objects.requireNonNull(demand);
     }
 
     long getId() {
@@ -67,6 +70,10 @@ class LocationEntity {
 
     String getDescription() {
         return description;
+    }
+    
+    int getDemand() {
+        return demand;
     }
 
     @Override

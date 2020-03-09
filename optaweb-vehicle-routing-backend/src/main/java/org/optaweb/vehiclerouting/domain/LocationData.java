@@ -27,10 +27,12 @@ public class LocationData {
 
     private final Coordinates coordinates;
     private final String description;
+    private final int demand;
 
-    public LocationData(Coordinates coordinates, String description) {
+    public LocationData(Coordinates coordinates, int demand, String description) {
         this.coordinates = Objects.requireNonNull(coordinates);
         this.description = Objects.requireNonNull(description);
+        this.demand = demand;
     }
 
     public Coordinates coordinates() {
@@ -39,6 +41,10 @@ public class LocationData {
 
     public String description() {
         return description;
+    }
+
+    public int demand() {
+        return demand;
     }
 
     @Override
@@ -63,6 +69,7 @@ public class LocationData {
     public String toString() {
         return "LocationData{" +
                 "coordinates=" + coordinates +
+                ", demand=" + demand +
                 ", description='" + description + '\'' +
                 '}';
     }

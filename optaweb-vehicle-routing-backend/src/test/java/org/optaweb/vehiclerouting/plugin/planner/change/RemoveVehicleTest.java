@@ -45,7 +45,7 @@ class RemoveVehicleTest {
         VehicleRoutingSolution solution = SolutionFactory.emptySolution();
         when(scoreDirector.getWorkingSolution()).thenReturn(solution);
 
-        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0);
+        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0, 1);
         PlanningDepot depot = new PlanningDepot();
         depot.setLocation(location);
 
@@ -94,7 +94,7 @@ class RemoveVehicleTest {
     void fail_fast_if_working_solution_vehicle_list_does_not_contain_working_vehicle() {
         VehicleRoutingSolution solution = SolutionFactory.emptySolution();
 
-        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0);
+        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0, 1);
         PlanningDepot depot = new PlanningDepot();
         depot.setLocation(location);
 
@@ -122,7 +122,7 @@ class RemoveVehicleTest {
     void fail_fast_if_working_object_is_null() {
         when(scoreDirector.getWorkingSolution()).thenReturn(SolutionFactory.emptySolution());
         PlanningDepot depot = new PlanningDepot();
-        depot.setLocation(new PlanningLocation(4L, 1, 2));
+        depot.setLocation(new PlanningLocation(4L, 1, 2, 1));
         PlanningVehicle vehicle = new PlanningVehicle();
         vehicle.setId(1L);
         vehicle.setDepot(depot);
@@ -133,7 +133,7 @@ class RemoveVehicleTest {
     }
 
     private static PlanningVisit visit(long id) {
-        PlanningLocation location = new PlanningLocation(1000000 + id, id, id);
+        PlanningLocation location = new PlanningLocation(1000000 + id, id, id, 1);
         PlanningVisit visit = new PlanningVisit();
         visit.setId(id);
         visit.setLocation(location);

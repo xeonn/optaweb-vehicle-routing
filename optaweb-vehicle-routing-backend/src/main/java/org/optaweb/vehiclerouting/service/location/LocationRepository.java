@@ -33,7 +33,7 @@ public interface LocationRepository {
      * @param description description of the location
      * @return a new location
      */
-    Location createLocation(Coordinates coordinates, String description);
+    Location createLocation(Coordinates coordinates, int demand, String description);
 
     /**
      * Get all locations.

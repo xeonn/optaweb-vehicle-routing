@@ -25,13 +25,13 @@ public class Location extends LocationData {
 
     private final long id;
 
-    public Location(long id, Coordinates coordinates) {
+    public Location(long id, Coordinates coordinates, int demand) {
         // TODO remove this?
-        this(id, coordinates, "");
+        this(id, coordinates, demand, "");
     }
 
-    public Location(long id, Coordinates coordinates, String description) {
-        super(coordinates, description);
+    public Location(long id, Coordinates coordinates, int demand, String description) {
+        super(coordinates, demand, description);
         this.id = id;
     }
 

@@ -30,26 +30,30 @@ public class PlanningLocation extends AbstractPersistable {
     private BigDecimal latitude;
     private BigDecimal longitude;
     private String description;
+    private int demand;
 
     public PlanningLocation() {
     }
 
-    public PlanningLocation(long id, double latitude, double longitude) {
+    public PlanningLocation(long id, double latitude, double longitude, int demand) {
         super(id);
         this.latitude = BigDecimal.valueOf(latitude);
         this.longitude = BigDecimal.valueOf(longitude);
+        this.demand = demand;
     }
 
-    public PlanningLocation(long id, BigDecimal latitude, BigDecimal longitude) {
+    public PlanningLocation(long id, BigDecimal latitude, BigDecimal longitude, int demand) {
         super(id);
         this.latitude = latitude;
         this.longitude = longitude;
+        this.demand = demand;
     }
 
-    public PlanningLocation(long id, BigDecimal latitude, BigDecimal longitude, String description) {
+    public PlanningLocation(long id, BigDecimal latitude, BigDecimal longitude, int demand, String description) {
         super(id);
         this.latitude = latitude;
         this.longitude = longitude;
+        this.demand = demand;
         this.description = description;
     }
 
@@ -58,6 +62,8 @@ public class PlanningLocation extends AbstractPersistable {
             latitude = location.coordinates().latitude();
             longitude = location.coordinates().longitude();
         }
+        
+        this.demand = location.demand();
         description = location.description();
         id = location.id();
     }
@@ -87,6 +93,14 @@ public class PlanningLocation extends AbstractPersistable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public int getDemand() {
+        return this.demand;
+    }
+    
+    public void setDemand(int demand) {
+        this.demand = demand;
     }
 
     public Map<PlanningLocation, Double> getTravelDistanceMap() {

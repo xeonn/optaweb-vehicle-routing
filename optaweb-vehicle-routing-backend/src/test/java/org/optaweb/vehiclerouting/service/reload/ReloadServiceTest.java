@@ -52,7 +52,7 @@ class ReloadServiceTest {
     ApplicationStartedEvent event;
 
     private final Coordinates coordinates = Coordinates.valueOf(0.0, 1.0);
-    private final Location location = new Location(1, coordinates);
+    private final Location location = new Location(1, coordinates, 1);
     private final List<Location> persistedLocations = Arrays.asList(location, location, location);
 
     @Test

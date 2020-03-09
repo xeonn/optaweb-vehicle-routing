@@ -66,7 +66,7 @@ class PortableRouteTest {
     }
 
     private static PortableLocation visit(long id, double latitude, double longitude, String description) {
-        return fromLocation(new Location(id, Coordinates.valueOf(latitude, longitude), description));
+        return fromLocation(new Location(id, Coordinates.valueOf(latitude, longitude), 1, description));
     }
 
     private static PortableCoordinates coordinates(double latitude, double longitude) {

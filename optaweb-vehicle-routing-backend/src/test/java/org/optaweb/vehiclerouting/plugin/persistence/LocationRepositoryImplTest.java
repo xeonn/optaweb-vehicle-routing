@@ -59,7 +59,7 @@ class LocationRepositoryImplTest {
         final BigDecimal latitude = BigDecimal.valueOf(1.2);
         final BigDecimal longitude = BigDecimal.valueOf(3.4);
         final String description = "description";
-        testLocation = new Location(id, new Coordinates(latitude, longitude), description);
+        testLocation = new Location(id, new Coordinates(latitude, longitude), 1, description);
         when(locationEntity.getId()).thenReturn(id);
         when(locationEntity.getLatitude()).thenReturn(latitude);
         when(locationEntity.getLongitude()).thenReturn(longitude);
@@ -74,7 +74,7 @@ class LocationRepositoryImplTest {
         String savedDescription = "new location";
 
         // act
-        Location createdLocation = repository.createLocation(savedCoordinates, savedDescription);
+        Location createdLocation = repository.createLocation(savedCoordinates, 1, savedDescription);
 
         // assert
         // -- the correct values were used to save the entity

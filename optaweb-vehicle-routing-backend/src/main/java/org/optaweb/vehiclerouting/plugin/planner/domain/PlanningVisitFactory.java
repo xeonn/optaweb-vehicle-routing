@@ -36,7 +36,7 @@ public class PlanningVisitFactory {
         PlanningVisit visit = new PlanningVisit();
         visit.setId(location.getId());
         visit.setLocation(location);
-        visit.setDemand(DEFAULT_VISIT_DEMAND);
+        visit.setDemand(location.getDemand());
         return visit;
     }
 }

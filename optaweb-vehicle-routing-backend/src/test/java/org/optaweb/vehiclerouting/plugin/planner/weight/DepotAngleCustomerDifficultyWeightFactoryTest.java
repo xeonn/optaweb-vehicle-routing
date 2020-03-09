@@ -32,9 +32,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DepotAngleCustomerDifficultyWeightFactoryTest {
 
-    private final PlanningLocation location1 = new PlanningLocation(1, 1.0, 1.0);
-    private final PlanningLocation location2 = new PlanningLocation(2, 1.0, 1.0);
-    private final PlanningLocation location3 = new PlanningLocation(3, 1.0, 50.0);
+    private final PlanningLocation location1 = new PlanningLocation(1, 1.0, 1.0, 1);
+    private final PlanningLocation location2 = new PlanningLocation(2, 1.0, 1.0, 1);
+    private final PlanningLocation location3 = new PlanningLocation(3, 1.0, 50.0, 1);
 
     DepotAngleCustomerDifficultyWeightFactoryTest() {
         //Location 1 is close to location 2 and far away from location 3

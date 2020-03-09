@@ -147,7 +147,7 @@ class RemoveVisitTest {
     }
 
     private static PlanningVisit visit(long id) {
-        PlanningLocation location = new PlanningLocation(1000000 + id, id, id);
+        PlanningLocation location = new PlanningLocation(1000000 + id, id, id, 1);
         PlanningVisit visit = new PlanningVisit();
         visit.setId(id);
         visit.setLocation(location);

@@ -64,9 +64,9 @@ class WebSocketControllerTest {
     void subscribeToRouteTopic() {
         // arrange
         String distance = "some distance";
-        Location depot = new Location(1, Coordinates.valueOf(3, 5));
+        Location depot = new Location(1, Coordinates.valueOf(3, 5), 1);
         Vehicle vehicle = VehicleFactory.createVehicle(1, "vehicle", 77);
-        Location visit = new Location(2, Coordinates.valueOf(321, 123));
+        Location visit = new Location(2, Coordinates.valueOf(321, 123), 1);
         Route route = new Route(vehicle, depot, singletonList(visit));
         Coordinates pointOnTrack = Coordinates.valueOf(0, 0);
         RouteWithTrack routeWithTrack = new RouteWithTrack(route, singletonList(singletonList(pointOnTrack)));
@@ -101,8 +101,8 @@ class WebSocketControllerTest {
         BoundingBox boundingBox = new BoundingBox(southWest, northEast);
         when(regionService.boundingBox()).thenReturn(boundingBox);
 
-        Location depot = new Location(1, Coordinates.valueOf(1.0, 7), "Depot");
-        List<Location> visits = Arrays.asList(new Location(2, Coordinates.valueOf(2.0, 9), "Visit"));
+        Location depot = new Location(1, Coordinates.valueOf(1.0, 7), 1, "Depot");
+        List<Location> visits = Arrays.asList(new Location(2, Coordinates.valueOf(2.0, 9), 1, "Visit"));
         String demoName = "Testing problem";
         RoutingProblem routingProblem = new RoutingProblem(demoName, depot, visits);
         when(demoService.demos()).thenReturn(Arrays.asList(routingProblem));
@@ -127,9 +127,9 @@ class WebSocketControllerTest {
     void addLocation() {
         Coordinates coords = Coordinates.valueOf(0.0, 1.0);
         String description = "new location";
-        PortableLocation request = new PortableLocation(321, coords.latitude(), coords.longitude(), description);
+        PortableLocation request = new PortableLocation(321, coords.latitude(), coords.longitude(), 1, description);
         webSocketController.addLocation(request);
-        verify(locationService).createLocation(coords, description);
+        verify(locationService).createLocation(coords, 1, description);
     }
 
     @Test

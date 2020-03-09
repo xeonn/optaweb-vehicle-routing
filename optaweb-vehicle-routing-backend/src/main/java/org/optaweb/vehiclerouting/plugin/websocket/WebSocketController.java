@@ -98,7 +98,7 @@ class WebSocketController {
     void addLocation(PortableLocation request) {
         locationService.createLocation(
                 new Coordinates(request.getLatitude(), request.getLongitude()),
-                request.getDescription()
+                request.getDemand(), request.getDescription()
         );
     }
 

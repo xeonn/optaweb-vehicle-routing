@@ -34,6 +34,8 @@ class PortableLocation {
     private final BigDecimal latitude;
     @JsonProperty(value = "lng", required = true)
     private final BigDecimal longitude;
+    @JsonProperty(value = "demand")
+    private final int demand;
 
     private final String description;
 
@@ -43,6 +45,7 @@ class PortableLocation {
                 location.id(),
                 location.coordinates().latitude(),
                 location.coordinates().longitude(),
+                location.demand(),
                 location.description()
         );
     }
@@ -52,11 +55,13 @@ class PortableLocation {
             @JsonProperty(value = "id") long id,
             @JsonProperty(value = "lat") BigDecimal latitude,
             @JsonProperty(value = "lng") BigDecimal longitude,
+            @JsonProperty(value = "demand") int demand,
             @JsonProperty(value = "description") String description
     ) {
         this.id = id;
         this.latitude = Objects.requireNonNull(latitude);
         this.longitude = Objects.requireNonNull(longitude);
+        this.demand = demand > 0 ? demand : 1;
         this.description = Objects.requireNonNull(description);
     }
 
@@ -74,6 +79,10 @@ class PortableLocation {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getDemand() {
+        return demand;
     }
 
     @Override
@@ -103,6 +112,7 @@ class PortableLocation {
                 ", description='" + description + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+                ", demand=" + demand +
                 '}';
     }
 }

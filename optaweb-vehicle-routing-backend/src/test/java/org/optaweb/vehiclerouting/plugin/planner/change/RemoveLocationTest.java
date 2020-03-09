@@ -41,7 +41,7 @@ class RemoveLocationTest {
         VehicleRoutingSolution solution = SolutionFactory.emptySolution();
         when(scoreDirector.getWorkingSolution()).thenReturn(solution);
 
-        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0);
+        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0, 1);
         solution.getLocationList().add(location);
 
         when(scoreDirector.lookUpWorkingObject(location)).thenReturn(location);
@@ -62,10 +62,10 @@ class RemoveLocationTest {
         VehicleRoutingSolution solution = SolutionFactory.emptySolution();
 
         long removedId = 111L;
-        PlanningLocation removedLocation = new PlanningLocation(removedId, 0, 1);
+        PlanningLocation removedLocation = new PlanningLocation(removedId, 0, 1, 1);
         removedLocation.setId(removedId);
         long wrongId = 222L;
-        PlanningLocation wrongLocation = new PlanningLocation(wrongId, 1, 0);
+        PlanningLocation wrongLocation = new PlanningLocation(wrongId, 1, 0, 1);
         wrongLocation.setId(wrongId);
         solution.getLocationList().add(wrongLocation);
 
@@ -84,7 +84,7 @@ class RemoveLocationTest {
         when(scoreDirector.getWorkingSolution()).thenReturn(SolutionFactory.emptySolution());
 
         assertThatIllegalStateException()
-                .isThrownBy(() -> new RemoveLocation(new PlanningLocation(1, 2, 3)).doChange(scoreDirector))
+                .isThrownBy(() -> new RemoveLocation(new PlanningLocation(1, 2, 3, 1)).doChange(scoreDirector))
                 .withMessageContaining("working copy of");
     }
 }

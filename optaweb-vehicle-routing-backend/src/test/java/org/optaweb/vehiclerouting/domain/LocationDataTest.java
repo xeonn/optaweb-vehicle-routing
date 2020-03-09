@@ -27,8 +27,8 @@ class LocationDataTest {
 
     @Test
     void constructor_params_must_not_be_null() {
-        assertThatNullPointerException().isThrownBy(() -> new LocationData(null, ""));
-        assertThatNullPointerException().isThrownBy(() -> new LocationData(Coordinates.valueOf(1, 1), null));
+        assertThatNullPointerException().isThrownBy(() -> new LocationData(null, 1, ""));
+        assertThatNullPointerException().isThrownBy(() -> new LocationData(Coordinates.valueOf(1, 1), 1, null));
     }
 
     @Test
@@ -37,19 +37,19 @@ class LocationDataTest {
         Coordinates coordinates1 = new Coordinates(BigDecimal.ONE, BigDecimal.ONE);
         String description = "test description";
 
-        final LocationData locationData = new LocationData(coordinates0, description);
+        final LocationData locationData = new LocationData(coordinates0, 1, description);
 
         // different coordinates
-        assertThat(locationData).isNotEqualTo(new LocationData(coordinates1, description));
+        assertThat(locationData).isNotEqualTo(new LocationData(coordinates1, 1, description));
         // different description
-        assertThat(locationData).isNotEqualTo(new LocationData(coordinates0, "xyz"));
+        assertThat(locationData).isNotEqualTo(new LocationData(coordinates0, 1, "xyz"));
         // null
         assertThat(locationData).isNotEqualTo(null);
         // different type with equal properties
-        assertThat(locationData).isNotEqualTo(new Location(0, coordinates0, description));
+        assertThat(locationData).isNotEqualTo(new Location(0, coordinates0, 1, description));
         // same object -> OK
         assertThat(locationData).isEqualTo(locationData);
         // same properties -> OK
-        assertThat(locationData).isEqualTo(new LocationData(coordinates0, description));
+        assertThat(locationData).isEqualTo(new LocationData(coordinates0, 1, description));
     }
 }

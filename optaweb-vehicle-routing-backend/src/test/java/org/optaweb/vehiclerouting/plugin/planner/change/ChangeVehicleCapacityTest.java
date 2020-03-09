@@ -39,7 +39,7 @@ class ChangeVehicleCapacityTest {
 
     @Test
     void change_vehicle_capacity() {
-        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0);
+        PlanningLocation location = new PlanningLocation(1, 2.0, 3.0, 1);
         PlanningDepot depot = new PlanningDepot();
         depot.setLocation(location);
 
@@ -71,7 +71,7 @@ class ChangeVehicleCapacityTest {
     @Test
     void fail_fast_if_working_object_is_null() {
         PlanningDepot depot = new PlanningDepot();
-        depot.setLocation(new PlanningLocation(4L, 1, 2));
+        depot.setLocation(new PlanningLocation(4L, 1, 2, 1));
         PlanningVehicle vehicle = new PlanningVehicle();
         vehicle.setId(1L);
         vehicle.setDepot(depot);

@@ -57,8 +57,8 @@ class DistanceRepositoryIntegrationTest {
 
     @Test
     void should_return_saved_distance() {
-        Location location1 = new Location(1, Coordinates.valueOf(7, -4.0));
-        Location location2 = new Location(2, Coordinates.valueOf(5, 9.0));
+        Location location1 = new Location(1, Coordinates.valueOf(7, -4.0), 1);
+        Location location2 = new Location(2, Coordinates.valueOf(5, 9.0), 1);
 
         double distance = 95676.6417;
         repository.saveDistance(location1, location2, distance);
@@ -67,8 +67,8 @@ class DistanceRepositoryIntegrationTest {
 
     @Test
     void should_return_negative_number_when_distance_not_found() {
-        Location location1 = new Location(1, Coordinates.valueOf(7, -4.0));
-        Location location2 = new Location(2, Coordinates.valueOf(5, 9.0));
+        Location location1 = new Location(1, Coordinates.valueOf(7, -4.0), 1);
+        Location location2 = new Location(2, Coordinates.valueOf(5, 9.0), 1);
 
         assertThat(repository.getDistance(location1, location2)).isNegative();
     }

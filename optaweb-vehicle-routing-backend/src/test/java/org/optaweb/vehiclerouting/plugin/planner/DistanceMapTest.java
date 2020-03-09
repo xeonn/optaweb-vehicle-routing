@@ -27,9 +27,9 @@ class DistanceMapTest {
 
     @Test
     void distance_map_should_convert_millis_to_secs() {
-        PlanningLocation location = new PlanningLocation(1, 8.0, 0.8);
+        PlanningLocation location = new PlanningLocation(1, 8.0, 0.8, 1);
         long otherId = 2;
-        PlanningLocation location2 = new PlanningLocation(otherId, 0.0, 0.0);
+        PlanningLocation location2 = new PlanningLocation(otherId, 0.0, 0.0, 1);
         double distance = 45000;
         HashMap<Long, Double> distanceMap = new HashMap<>(1);
         distanceMap.put(otherId, distance);

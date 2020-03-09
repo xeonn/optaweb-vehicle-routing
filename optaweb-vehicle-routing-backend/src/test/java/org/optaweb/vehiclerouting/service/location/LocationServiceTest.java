@@ -44,22 +44,22 @@ class LocationServiceTest {
     private LocationService locationService;
 
     private final Coordinates coordinates = Coordinates.valueOf(0.0, 1.0);
-    private final Location location = new Location(1, coordinates);
+    private final Location location = new Location(1, coordinates, 1);
 
     @Test
     void createLocation_should_validate_arguments() {
-        assertThatNullPointerException().isThrownBy(() -> locationService.createLocation(null, "x"));
-        assertThatNullPointerException().isThrownBy(() -> locationService.createLocation(coordinates, null));
+        assertThatNullPointerException().isThrownBy(() -> locationService.createLocation(null, 1, "x"));
+        assertThatNullPointerException().isThrownBy(() -> locationService.createLocation(coordinates, 1, null));
     }
 
     @Test
     void createLocation() {
         String description = "new location";
-        when(repository.createLocation(coordinates, description)).thenReturn(location);
+        when(repository.createLocation(coordinates, 1, description)).thenReturn(location);
 
-        assertThat(locationService.createLocation(coordinates, description)).isTrue();
+        assertThat(locationService.createLocation(coordinates, 1, description)).isTrue();
 
-        verify(repository).createLocation(coordinates, description);
+        verify(repository).createLocation(coordinates, 1, description);
         verify(distanceMatrix).addLocation(location);
         verify(optimizer).addLocation(location, distanceMatrix);
     }
@@ -99,10 +99,10 @@ class LocationServiceTest {
 
     @Test
     void should_not_optimize_and_roll_back_if_distance_calculation_fails() {
-        when(repository.createLocation(coordinates, "")).thenReturn(location);
+        when(repository.createLocation(coordinates, 1, "")).thenReturn(location);
         doThrow(RuntimeException.class).when(distanceMatrix).addLocation(location);
 
-        assertThat(locationService.createLocation(coordinates, "")).isFalse();
+        assertThat(locationService.createLocation(coordinates, 1, "")).isFalse();
         verifyZeroInteractions(optimizer);
         // roll back
         verify(repository).removeLocation(location.id());

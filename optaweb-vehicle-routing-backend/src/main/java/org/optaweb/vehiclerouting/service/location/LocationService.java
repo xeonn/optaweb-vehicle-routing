@@ -48,11 +48,11 @@ public class LocationService {
         this.distanceMatrix = distanceMatrix;
     }
 
-    public synchronized boolean createLocation(Coordinates coordinates, String description) {
+    public synchronized boolean createLocation(Coordinates coordinates, int demand, String description) {
         Objects.requireNonNull(coordinates);
         Objects.requireNonNull(description);
         // TODO if (router.isLocationAvailable(coordinates))
-        return submitToPlanner(repository.createLocation(coordinates, description));
+        return submitToPlanner(repository.createLocation(coordinates, demand, description));
     }
 
     public synchronized boolean addLocation(Location location) {
