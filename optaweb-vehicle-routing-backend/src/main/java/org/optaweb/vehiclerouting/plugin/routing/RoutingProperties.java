@@ -17,6 +17,7 @@
 package org.optaweb.vehiclerouting.plugin.routing;
 
 import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -30,17 +31,20 @@ class RoutingProperties {
     /**
      * Directory to read OSM files from.
      */
-    private String osmDir = "local/openstreetmap";
+    @Value("${osm-dir:local/openstreetmap}")
+    private String osmDir;
 
     /**
      * Directory where GraphHopper graphs are stored.
      */
-    private String ghDir = "local/graphhopper";
+    @Value("${osm-dir:local/graphhopper}")
+    private String ghDir;
 
     /**
      * OpenStreetMap file name.
      */
     @NotNull
+    @Value("${osm-file:malaysia-singapore-brunei-latest.osm.pbf}")
     private String osmFile;
 
     /**
