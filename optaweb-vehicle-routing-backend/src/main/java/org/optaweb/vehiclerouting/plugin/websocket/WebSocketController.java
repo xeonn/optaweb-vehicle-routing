@@ -33,12 +33,14 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * Handles WebSocket subscriptions and STOMP messages.
  * @see WebSocketConfig
  */
 @Controller
+@CrossOrigin(origins = "*")
 class WebSocketController {
 
     private final RouteListener routeListener;

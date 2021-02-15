@@ -2,8 +2,8 @@ FROM docker.io/library/nginx:1.17.5
 COPY docker/nginx.conf /etc/nginx
 COPY docker/default.conf /tmp/default.template
 
-ENV BACKEND_HOST=172.17.0.6
-ENV BACKEND_PORT=8080
+ENV BACKEND_HOST=localhost
+ENV BACKEND_PORT=8180
 ENV BACKEND_URL=http://$BACKEND_HOST:$BACKEND_PORT
 
 RUN envsubst '${BACKEND_URL}' < /tmp/default.template > /etc/nginx/conf.d/default.conf \

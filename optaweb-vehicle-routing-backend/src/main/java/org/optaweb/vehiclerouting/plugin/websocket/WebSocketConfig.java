@@ -42,7 +42,7 @@ class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setAllowedOrigins(
                         "https://frontend.planonn.com",
                         "https://planner.planonn.com",
-                        "http//planner.planonn.com",
+                        "http://planner.planonn.com",
                         "chrome-extension://ggnhohnkfcpcanfekomdkjffnfcjnjam",
                         "http://localhost:3000")
                 .withSockJS();
