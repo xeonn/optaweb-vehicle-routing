@@ -36,15 +36,7 @@ public class OptaWebVehicleRoutingApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*")
-                        /*
-                        .allowedOrigins("https://frontend.planonn.com",
-                                "https://planner.planonn.com",
-                                "http://planner.planonn.com",
-                                "chrome-extension://ggnhohnkfcpcanfekomdkjffnfcjnjam",
-                                "http://localhost:3000").allowCredentials(true)
-                        */
-                        .allowedOrigins("*").allowCredentials(true);
+                registry.addMapping("/**");
             }
         };
     }

@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * @see WebSocketConfig
  */
 @Controller
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "")
 class WebSocketController {
 
     private final RouteListener routeListener;
