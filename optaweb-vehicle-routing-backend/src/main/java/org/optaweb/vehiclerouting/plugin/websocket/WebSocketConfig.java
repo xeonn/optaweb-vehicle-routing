@@ -40,6 +40,8 @@ class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry
                 .addEndpoint("/vrp-websocket")
                 .setAllowedOrigins(
+                        "https://vanadmin.jasminerice.online",
+                        "https://swiftvisitadmin.swiftmerchant.online/",
                         "https://frontend.planonn.com",
                         "https://planner.planonn.com",
                         "http://planner.planonn.com",
